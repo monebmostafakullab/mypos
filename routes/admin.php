@@ -11,6 +11,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
             Route::get('/','DashboardController@index')->name('index');
             Route::get('/index','DashboardController@index')->name('index');
 
+            // Admins Controller
+            Route::resource('admins','AdminController')->except('show');
+
         });//end of Admins routs
 });//end localization
 

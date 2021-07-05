@@ -13,7 +13,7 @@
 
         <section class="content">
 
-            <div class="row">
+{{--            <div class="row">--}}
 
 {{--                --}}{{-- categories--}}
 {{--                <div class="col-lg-3 col-xs-6">--}}
