@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Blank Page</title>
+    <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     {{--<!-- Bootstrap 3.3.7 -->--}}
@@ -88,7 +88,7 @@
         <a href="{{ asset('dashboard') }}/index2.html" class="logo">
             {{--<!-- mini logo for sidebar mini 50x50 pixels -->--}}
             <span class="logo-mini"><b>A</b>LT</span>
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <span class="logo-lg"><b>{{config('app.name')}}</b>LTE</span>
         </a>
 
         <nav class="navbar navbar-static-top">
@@ -105,7 +105,7 @@
 
                     <!-- Messages: style can be found in dropdown.less-->
                     <li class="dropdown messages-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height: 50px">
                             <i class="fa fa-envelope-o"></i>
                             <span class="label label-success">4</span>
                         </a>
@@ -138,7 +138,7 @@
 
                     {{--<!-- Notifications: style can be found in dropdown.less -->--}}
                     <li class="dropdown notifications-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height: 50px">
                             <i class="fa fa-bell-o"></i>
                             <span class="label label-warning">10</span>
                         </a>
@@ -162,7 +162,7 @@
 
                     {{--<!-- Tasks: style can be found in dropdown.less -->--}}
                     <li class="dropdown tasks-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag-o"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height: 50px"><i class="fa fa-flag-o"></i></a>
                         <ul class="dropdown-menu">
                             <li>
                                 {{--<!-- inner menu: contains the actual data -->--}}
@@ -184,7 +184,7 @@
 
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-{{--                            <span class="hidden-xs">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</span>--}}
+                           <span class="hidden-xs">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</span>
                         </a>
                         <ul class="dropdown-menu">
 
@@ -193,7 +193,7 @@
                                 <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
                                 <p>
-{{--                                    {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}--}}
+                                   {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
                                     <small>Member since 2 days</small>
                                 </p>
                             </li>
@@ -202,10 +202,10 @@
                             <li class="user-footer">
 
 
-                                <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault();
+                                <a href="{{ route('admin.logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">@lang('site.logout')</a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
 
@@ -223,6 +223,7 @@
     @yield('content')
 
     @include('partials._session')
+    @include('partials._errors')
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
@@ -291,20 +292,22 @@
             });
             n.show();
         });//end of delete
-        // // image preview
-        // $(".image").change(function () {
-        //
-        //     if (this.files && this.files[0]) {
-        //         var reader = new FileReader();
-        //
-        //         reader.onload = function (e) {
-        //             $('.image-preview').attr('src', e.target.result);
-        //         }
-        //
-        //         reader.readAsDataURL(this.files[0]);
-        //     }
-        //
-        // });
+
+
+        // image preview
+        $(".image").change(function () {
+        
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+        
+                reader.onload = function (e) {
+                    $('.image-preview').attr('src', e.target.result);
+                }
+        
+                reader.readAsDataURL(this.files[0]);
+            }
+        
+        });
         CKEDITOR.config.language =  "{{ app()->getLocale() }}";
     });//end of ready
 

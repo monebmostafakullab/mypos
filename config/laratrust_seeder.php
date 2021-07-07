@@ -15,6 +15,7 @@ return [
         'super_admin' => [
             'admins' => 'c,r,u,d',
         ],
+        'admin'=>[],
     ],
 
     'permissions_map' => [
